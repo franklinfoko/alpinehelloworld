@@ -32,15 +32,23 @@ pipeline {
       }
     }
 
-    stage ('Push image'){
-      steps {
-        withCredentials([gitUsernamePassword(credentialsId: 'hub-credentials', gitToolName: 'Default')]) {
-            sh'''
-               docker push ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
-            '''
-          }
-      }
-    }
+    stage('Push our image') { 
+
+            steps { 
+
+                script { 
+
+                    docker.withRegistry( '', hub-credentials ) { 
+
+                        dockerImage.push() 
+
+                    }
+
+                } 
+
+            }
+
+        }
            
   }
 }

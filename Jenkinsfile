@@ -36,7 +36,6 @@ pipeline {
       steps {
         withCredentials([gitUsernamePassword(credentialsId: 'hub-credentials', gitToolName: 'Default')]) {
             sh'''
-               docker login -u ${DOCKERHUB_ID}
                docker push ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
             '''
           }

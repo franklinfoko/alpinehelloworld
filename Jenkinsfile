@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  environment {
+    registryCredential = 'hub-credential'
+  }
+
   parameters {
     string(name: 'IMAGE_NAME', defaultValue: 'alpinehelloworld', description: 'le nom de mon image docker')
     string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'le tag de mon image')
@@ -36,15 +40,16 @@ pipeline {
 
             steps { 
 
-                script { 
-
-                    docker.withRegistry( '', hub-credentials ) { 
-
-                        dockerImage.push() 
-
-                    }
-
-                } 
+                withCredentials([usernamePassword(
+        credentialsId: 'hub-credentials',
+        passwordVariable: 'DOCKERHUB_PASSWORD',
+        usernameVariable: 'DOCKERHUB_USER'
+    )]) {
+        sh """
+         docker login -u '$DOCKERHUB_USER' -p '$DOCKERHUB_PASSWORD'
+         docker push ${hubUser}/${imageRepoName}:${imageTag}
+        """ 
+    }
 
             }
 

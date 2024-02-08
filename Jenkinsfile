@@ -63,6 +63,7 @@ pipeline {
                       ssh -i jenkins ubuntu@34.233.252.255
                     '''
                   }
+            }
 
         }
            

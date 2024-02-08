@@ -59,7 +59,9 @@ pipeline {
 
             steps { 
               withCredentials([sshUserPrivateKey(credentialsId: 'sshkey', keyFileVariable: 'jenkins', usernameVariable: 'ubuntu')]) {
-                    ssh -i jenkins ubuntu@34.233.252.255 
+                    sh '''
+                      ssh -i jenkins ubuntu@34.233.252.255
+                    '''
                   }
 
         }

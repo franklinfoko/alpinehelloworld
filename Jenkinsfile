@@ -47,7 +47,7 @@ pipeline {
     )]) {
         sh """
          docker login -u '$DOCKERHUB_USER' -p '$DOCKERHUB_PASSWORD'
-         docker push ${hubUser}/${imageRepoName}:${imageTag}
+         docker push ${DOCKERHUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
         """ 
     }
 

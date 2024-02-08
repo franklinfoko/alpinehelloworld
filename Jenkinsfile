@@ -55,7 +55,7 @@ pipeline {
 
         }
 
-        stage('Push our image') { 
+        stage('Deploy') { 
 
             steps { 
               withCredentials([sshUserPrivateKey(credentialsId: 'sshkey', keyFileVariable: 'jenkins', usernameVariable: 'ubuntu')]) {

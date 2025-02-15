@@ -11,7 +11,7 @@ pipeline {
     stage('Build docker image') {
       steps {
         sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
-        sh 'doker rm -f ${CONTAINER_NAME}'
+        sh 'docker rm -f ${CONTAINER_NAME}'
       }
     }
   }
